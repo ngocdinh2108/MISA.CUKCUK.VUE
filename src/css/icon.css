@@ -1,0 +1,110 @@
+.icon-overview-20 {
+    background-image: url('../assets/icon/dashboard.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-report-20 {
+    background-image: url('../assets/icon/report.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-purchase-20 {
+    background-image: url('../assets/icon/document-online.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-employee-list-20 {
+    background-image: url('../assets/icon/dic-employee.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-setting-20 {
+    background-image: url('../assets/icon/setting.png');
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-option-16 {
+    background-image: url('../assets/icon/option.png');
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-add-16 {
+    background-image: url('../assets/icon/add.png');
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon-search-16 {
+    background-image: url('../assets/icon/search.png');
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: 16px center;
+}
+
+.icon-refresh {
+    background-image: url('../assets/icon/refresh.png');
+    width: 36px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+}
+
+.icon-first-page {
+    background-image: url('../assets/icon/btn-firstpage.svg');
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+}
+
+.icon-prev-page {
+    background-image: url('../assets/icon/btn-prev-page.svg');
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+}
+
+.icon-next-page {
+    background-image: url('../assets/icon/btn-next-page.svg');
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+}
+
+.icon-last-page {
+    background-image: url('../assets/icon/btn-lastpage.svg');
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+}
+
+.icon-close {
+    background-image: url('../assets/icon/x.svg');
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}

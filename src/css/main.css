@@ -1,0 +1,64 @@
+body {
+    height: 100vh;
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+    margin: 0;
+    color: #000000;
+}
+
+.wrap-body {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.wrap-right {
+    height: 100%;
+    width: calc(100% - 221px);
+}
+
+.select-gender {
+    height: 34px;
+    width: 264px;
+    border-radius: 3px;
+    border: 2px solid #e5e5e5;
+    outline: none;
+    padding-left: 16px;
+}
+
+input:focus-within {
+    border: 1px solid #019160;
+}
+
+input.border-red {
+    border: 1px solid #FF4747;
+}
+
+.row-selected {
+    background-color: #67c2a4;
+}
+
+@font-face {
+    font-family: 'GoogleSans-Black';
+    src: url('../assets/font/GoogleSans-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Bold';
+    src: url('../assets/font/GoogleSans-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Italic';
+    src: url('../assets/font/GoogleSans-Italic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('../assets/font/GoogleSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Thin';
+    src: url('../assets/font/GoogleSans-Thin.otf') format('opentype');
+}

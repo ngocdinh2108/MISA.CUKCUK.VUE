@@ -1,0 +1,142 @@
+.dialog-modal {
+    opacity: 0.5;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.dialog-content {
+    width: 800px;
+    height: 610px;
+    position: absolute;
+    background-color: #ffffff;
+    z-index: 3;
+    top: calc(50% - 330px);
+    left: calc(50% - 400px);
+    border-radius: 5px;
+}
+
+.dialog-content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.dialog-content-header-text {
+    font-size: 20px;
+}
+
+.dialog-content-header-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 0 5px 0 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ffffff;
+    opacity: 0.7;
+}
+
+.dialog-content-header-icon:hover {
+    background-color: #e5e5e5;
+}
+
+.dialog-content-body {
+    height: calc(100% - 81px);
+    margin: 0 24px;
+    display: flex;
+}
+
+.dialog-body-left {
+    width: 180px;
+}
+
+.dialog-body-avatar {
+    width: 180px;
+    height: 180px;
+    background-image: url('/content/img/default-avatar.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid #e5e5e5;
+    border-radius: 100px;
+}
+
+.dialog-body-text {
+    text-align: center;
+}
+
+.dialog-body-right {
+    width: 100%;
+    margin: 0 0 24px 24px;
+}
+
+.dialog-body-header {
+    padding-bottom: 4px;
+    font-size: 14px;
+    position: relative;
+}
+
+.dialog-body-header::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 90px;
+    height: 3px;
+    top: 18px;
+    background-color: #019160;
+}
+
+.dialog-body-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dialog-body-row-left {
+    padding: 4px 0;
+}
+
+.dialog-label {
+    padding-bottom: 4px;
+}
+
+.dialog-content-footer {
+    height: 56px;
+    background-color: #e5e5e5;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.input-dialog {
+    height: 30px;
+    border-radius: 4px;
+    outline: none;
+    width: 244px;
+    border: 1px solid #e5e5e5;
+    padding-left: 16px;
+}
+
+.dialog-body-header-two {
+    margin-top: 20px;
+}
+
+input[fieldName] {
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+    color: #000000;
+}
+
+select[fieldName] {
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+    color: #000000;
+}
