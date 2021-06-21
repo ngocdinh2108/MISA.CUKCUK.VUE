@@ -61,7 +61,7 @@
 .dialog-body-avatar {
     width: 180px;
     height: 180px;
-    background-image: url('/content/img/default-avatar.jpg');
+    background-image: url('../assets/img/default-avatar.jpg');
     background-repeat: no-repeat;
     background-size: contain;
     border: 1px solid #e5e5e5;

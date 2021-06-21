@@ -1,14 +1,14 @@
 <template>
   <div class="wrap-body">
-    <!-- Phần menu bên tay trái -->
+    <!-- Component left sidebar -->
     <the-left-sidebar></the-left-sidebar>
 
-    <!-- Phần nội dung bên phải -->
+    <!-- Phần nội dung bên phải bao gồm header và content -->
     <div class="wrap-right">
-      <!-- Header -->
-      <the-header :varPr="variable"></the-header>
-      <!-- Content -->
-      <the-content></the-content>
+      <!-- Component header -->
+      <the-header></the-header>
+      <!-- Component content -->
+      <the-content :varPr="variable"></the-content>
     </div>
   </div>
 </template>
@@ -27,19 +27,18 @@ export default {
     TheContent,
   },
   data: function () {
-    return {
-      variable: "alo",
-    };
+    return {};
   },
 };
 </script>
 
 <style>
 /* Phần thư viện */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+/* Thư viện font awesome */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 /* Phần css dùng chung */
-@import url('css/main.css');
-@import url('css/icon.css');
-@import url('css/align.css');
-@import url('css/button.css');
+@import url("css/main.css");
+@import url("css/icon.css");
+@import url("css/align.css");
+@import url("css/button.css");
 </style>

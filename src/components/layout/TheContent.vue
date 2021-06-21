@@ -1,27 +1,15 @@
 <template>
-  <div class="content">
-    <content-header></content-header>
-    <content-filter-bar></content-filter-bar>
-    <content-grid></content-grid>
-    <content-paging></content-paging>
-  </div>
+  <!-- Phần nội dung thay đổi mỗi lần router -->
+  <router-view></router-view>
 </template>
 
 <script>
-import ContentHeader from "../../views/employee/ContentHeader.vue";
-import ContentFilterBar from "../../views/employee/ContentFilterBar.vue";
-import ContentGrid from "../../views/employee/ContentGrid.vue";
-import ContentPaging from "../../views/employee/ContentPaging.vue";
 export default {
-  components: {
-    ContentHeader,
-    ContentFilterBar,
-    ContentGrid,
-    ContentPaging,
-  },
+  components: {},
 };
 </script>
 
 <style scoped>
-@import url('../../css/content.css');
+/* Import css dùng cho component content */
+@import url("../../css/content.css");
 </style>

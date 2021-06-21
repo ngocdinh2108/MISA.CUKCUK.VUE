@@ -32,5 +32,6 @@ export default {};
 </script>
 
 <style scoped>
+/* Import css dùng cho component ContentPaging */
 @import url("../../css/paging.css");
 </style>

@@ -14,16 +14,10 @@
 </template>
 
 <script>
-export default {
-  props: {
-    varPr: {
-      type: String,
-      default: "1",
-    },
-  },
-};
+export default {};
 </script>
 
 <style scoped>
+/* Import css dùng cho component header */
 @import url("../../css/header.css");
 </style>

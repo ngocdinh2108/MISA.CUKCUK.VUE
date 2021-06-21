@@ -38,6 +38,10 @@ input.border-red {
     background-color: #67c2a4;
 }
 
+.m-hidden {
+    display: none;
+}
+
 @font-face {
     font-family: 'GoogleSans-Black';
     src: url('../assets/font/GoogleSans-Black.otf') format('opentype');

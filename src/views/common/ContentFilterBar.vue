@@ -56,5 +56,6 @@ export default {};
 </script>
 
 <style scoped>
+/* Import css dùng cho component filter bar */
 @import url("../../css/toolbar.css");
 </style>
