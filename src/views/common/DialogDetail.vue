@@ -284,7 +284,7 @@ export default {
           .post("http://cukcuk.manhnv.net/v1/Employees", this.employee)
           .then((res) => {
             console.log(res);
-            alert("Them thanh cong");
+            alert('Thêm thành công');
           })
           .catch((res) => {
             console.log(res);

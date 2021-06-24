@@ -1,0 +1,32 @@
+.toast-detail{
+    position: relative;
+    right: -220px;
+    top: -70px;
+    height: 48px;
+    border-radius: 4px;
+    width: 280px;
+    color: #000000;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 6px #000000;
+    justify-content: space-between;
+}
+
+.toast-detail-left{
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.toast-detail-right{
+    margin-right: 16px;
+}
+
+.toast-content{
+    margin-left: 6px;
+}
+
+i{
+    font-size: 24px;
+}

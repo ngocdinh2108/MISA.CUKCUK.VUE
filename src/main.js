@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 // Import vue router để sử dụng
 import VueRouter from 'vue-router';
 
@@ -25,6 +28,8 @@ export const router = new VueRouter({
 
 // Khai báo sử dụng Vue router
 Vue.use(VueRouter);
+
+Vue.use(VueSweetalert2);
 
 Vue.config.productionTip = false
 
