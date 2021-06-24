@@ -232,6 +232,9 @@ export default {
       isHide: true,
       employee: {},
       dialogMode: "",
+      colorToast: "#019160",
+      contentToast: "Thêm mới thành công",
+      iconToast: "fas fa-check-circle"
     };
   },
   // Ngay khi được khởi tạo, component DialogDetail sẽ thực hiện các nhiệm vụ bên trong hàm created()
@@ -284,7 +287,13 @@ export default {
           .post("http://cukcuk.manhnv.net/v1/Employees", this.employee)
           .then((res) => {
             console.log(res);
-            alert('Thêm thành công');
+            // Nếu như thêm thành công, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
+            eventBus.$emit("showToastMessenger", this.iconToast, this.contentToast, this.colorToast);
+            // Load lại dữ liệu
+
+            // Đóng dialog-detail
+            this.isHide = true;
+
           })
           .catch((res) => {
             console.log(res);
