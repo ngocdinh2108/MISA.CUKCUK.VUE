@@ -15,12 +15,12 @@ export const eventBus = new Vue();
 
 // Định nghĩa các path để router đến đúng url
 export const router = new VueRouter({
-  base: '/',
-  mode: 'history',
-  routes: [
-    { path: '/', component: HelloWorld },
-    { path: '/employee-list', component: EmployeeList }
-  ]
+    base: '/',
+    mode: 'history',
+    routes: [
+        { path: '/', component: HelloWorld },
+        { path: '/employee-list', component: EmployeeList }
+    ]
 });
 
 // Khai báo sử dụng Vue router
@@ -29,6 +29,6 @@ Vue.use(VueRouter);
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  render: h => h(App),
+    router,
+    render: h => h(App),
 }).$mount('#app')

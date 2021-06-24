@@ -27,17 +27,16 @@
           :key="employee.EmployeeId"
           @dblclick="trOnDblClick(employee.EmployeeId)"
           :class="{ 'row-selected': isSelected }"
-          @click="changeBackGroundColor()"
         >
           <td>{{ employee.EmployeeCode }}</td>
           <td>{{ employee.FullName }}</td>
           <td>{{ employee.GenderName }}</td>
-          <td>{{ employee.DateOfBirth }}</td>
+          <td class="m-align-center">{{ employee.DateOfBirth }}</td>
           <td>{{ employee.PhoneNumber }}</td>
           <td>{{ employee.Email }}</td>
           <td>{{ employee.PositionName }}</td>
           <td>{{ employee.DepartmentName }}</td>
-          <td>{{ employee.Salary }}</td>
+          <td class="m-align-right">{{ employee.Salary }}</td>
           <td>{{ employee.WorkStatus }}</td>
         </tr>
       </tbody>
@@ -46,8 +45,12 @@
 </template>
 
 <script>
+// Import file common.js để sử dụng các hàm dùng chung
+import commonJS from "../../js/common/common.js";
 // Import axios để sử dụng cho component ContentGrid.vue
 import axios from "axios";
+// Import eventBus để sử dụng
+import { eventBus } from "../../main.js";
 export default {
   // Ngay khi được khởi tạo, component ContentGrid sẽ thực hiện các nhiệm vụ bên trong hàm created()
   created() {
@@ -58,6 +61,16 @@ export default {
     axios
       .get("http://cukcuk.manhnv.net/v1/Employees")
       .then((res) => {
+        for (let index = 0; index < res.data.length; index++) {
+          // Format ngày sinh
+          res.data[index].DateOfBirth = commonJS.formatDate(
+            res.data[index].DateOfBirth
+          );
+          // Format tiền
+          res.data[index].Salary = commonJS.formatMoney(res.data[index].Salary);
+          // Chuyển đổi giới tính (kiểu số) và trạng thái công việc (kiểu số) về kiểu chuỗi hiển thị
+        }
+        // Đổ dữ liệu lấy được vào mảng this.employees đc khai báo trong data
         this.employees = res.data;
       })
       .catch((res) => {
@@ -69,12 +82,37 @@ export default {
     return {
       // Mảng employees để lưu trữ dữ liệu được get từ API
       employees: [],
-      isSelected: false
+      // Biến để lưu trạng thái của dialog-detail
+      dialogMode: "",
+      isSelected: false,
     };
   },
   methods: {
-    changeBackGroundColor() {
-      this.isSelected = true;
+    /**
+     * Sự kiện double click 1 dòng
+     * DNDINH 23.06.2021
+     */
+    trOnDblClick(employeeId) {
+      // Cập nhật lại trạng thái của dialog
+      this.dialogMode = "edit";
+      // Lấy id của bản ghi được chọn
+
+      // Gọi API lấy thông tin khách hàng
+      axios
+        .get(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`)
+        .then((res) => {
+          var employee = res.data;
+          // Gửi sự kiện và customer lấy được cho component DialogDetail
+          eventBus.$emit("getCustomer", employee);
+          // Gửi sự kiện dialogMode lấy được cho component DialogDetail
+          eventBus.$emit("getDialogMode", this.dialogMode);
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+      // Binding dữ liệu vào dialog-detail
+
+      // Hiển thị dialog-detail
     },
   },
 };

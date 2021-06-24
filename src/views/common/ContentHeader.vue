@@ -25,11 +25,13 @@ export default {
      * DNDINH 21.06.2021
      */
     showDialogDetail() {
-      eventBus.$emit("showDialog");
+      eventBus.$emit("showDialog", this.dialogMode);
     },
   },
   data() {
-    return {};
+    return {
+      dialogMode: "add"
+    };
   },
 };
 </script>

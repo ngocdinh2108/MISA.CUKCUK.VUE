@@ -25,6 +25,11 @@
         <div class="sidebar-item-text">Mua hàng</div>
       </div>
 
+      <div class="sidebar-content-item">
+        <div class="sidebar-item-icon icon-employee-list-20"></div>
+        <div class="sidebar-item-text">Danh mục khách hàng</div>
+      </div>
+
       <!-- Router đến trang danh mục nhân viên (EmployeeList.vue) -->
       <router-link class="sidebar-content-item" to="/employee-list">
         <div class="sidebar-item-icon icon-employee-list-20"></div>

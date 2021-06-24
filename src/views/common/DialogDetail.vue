@@ -31,6 +31,7 @@
                   id="txtID"
                   class="input-dialog input-required"
                   type="text"
+                  v-model="employee.EmployeeCode"
                 />
               </div>
             </div>
@@ -45,6 +46,7 @@
                   id="txtFullName"
                   class="input-dialog input-required"
                   type="text"
+                  v-model="employee.FullName"
                 />
               </div>
             </div>
@@ -59,6 +61,7 @@
                   id="dtDateOfBirth"
                   class="input-dialog"
                   type="date"
+                  v-model="employee.DateOfBirth"
                 />
               </div>
             </div>
@@ -71,10 +74,11 @@
                   id="cbxGender"
                   class="select-gender"
                   value=""
+                  v-model="employee.Gender"
                 >
-                  <option name="" id="">Nam</option>
-                  <option name="" id="">Nữ</option>
-                  <option name="" id="">Không xác định</option>
+                  <option name="" id="" value="1">Nam</option>
+                  <option name="" id="" value="0">Nữ</option>
+                  <option name="" id="" value="2">Không xác định</option>
                 </select>
               </div>
             </div>
@@ -117,6 +121,7 @@
                   class="input-dialog"
                   placeholder="example@domain.com"
                   type="email"
+                  v-model="employee.Email"
                 />
               </div>
             </div>
@@ -131,6 +136,7 @@
                   id="txtPhoneNumber"
                   class="input-dialog input-required"
                   type="text"
+                  v-model="employee.PhoneNumber"
                 />
               </div>
             </div>
@@ -160,6 +166,7 @@
                   id="txtDepartment"
                   class="input-dialog"
                   type="text"
+                  v-model="employee.PositionName"
                 />
               </div>
             </div>
@@ -174,6 +181,7 @@
                   id="txtSalary"
                   class="input-dialog"
                   type="text"
+                  v-model="employee.Salary"
                 />
               </div>
             </div>
@@ -186,6 +194,7 @@
                   id="txtStatus"
                   class="input-dialog"
                   type="text"
+                  v-model="employee.WorkStatus"
                 />
               </div>
             </div>
@@ -200,7 +209,11 @@
         >
           <div class="btn-text btn-dialog">Hủy</div>
         </button>
-        <button id="btn-save" class="m-btn-icon btn-dialog-icon">
+        <button
+          @click="btnSaveOnClick()"
+          id="btn-save"
+          class="m-btn-icon btn-dialog-icon"
+        >
           <i class="far fa-save"></i>
           <div class="btn-dialog">Lưu</div>
         </button>
@@ -210,12 +223,15 @@
 </template>
 
 <script>
+import axios from "axios";
 // Import eventBus để sử dụng
 import { eventBus } from "../../main.js";
 export default {
   data() {
     return {
       isHide: true,
+      employee: {},
+      dialogMode: "",
     };
   },
   // Ngay khi được khởi tạo, component DialogDetail sẽ thực hiện các nhiệm vụ bên trong hàm created()
@@ -224,8 +240,29 @@ export default {
      * Lắng nghe sự kiện được gửi sang từ component ContentHeader khi click nút thêm mới
      * DNDINH 21.06.2021
      */
-    eventBus.$on("showDialog", () => {
+    eventBus.$on("showDialog", (dialogModeEventBus) => {
+      this.dialogMode = dialogModeEventBus;
+      this.employee = {};
       this.isHide = false;
+    });
+
+    /**
+     * Lắng nghe sự kiện được gửi sang từ component ContentGrid khi double click 1 dòng
+     * DNDINH 23.06.2021
+     */
+    eventBus.$on("getCustomer", (employeeEventBus) => {
+      // Gán biến employee đc truyển sang cho data this.employee để sử dụng
+      this.employee = employeeEventBus;
+      // Biding dữ liệu vào dialog-detail bằng v-model và hiển thị dialog lên
+      this.isHide = false;
+    });
+
+    /**
+     * Lắng nghe sự kiện được gửi sang từ component ContentGrid khi double click 1 dòng
+     * DNDINH 23.06.2021
+     */
+    eventBus.$on("getDialogMode", (dialogModeEventBus) => {
+      this.dialogMode = dialogModeEventBus;
     });
   },
   methods: {
@@ -235,6 +272,40 @@ export default {
      */
     closeDialog() {
       this.isHide = true;
+    },
+    /**
+     * Sự kiện đóng ấn nút "Lưu"
+     * DNDINH 24.06.2021
+     */
+    btnSaveOnClick() {
+      // Khi ấn nút thêm nhân viên => trạng thái của dialog là "add"
+      if (this.dialogMode == "add") {
+        axios
+          .post("http://cukcuk.manhnv.net/v1/Employees", this.employee)
+          .then((res) => {
+            console.log(res);
+            alert("Them thanh cong");
+          })
+          .catch((res) => {
+            console.log(res);
+            alert("Them that bai");
+          });
+        // Khi ấn dblclick vào 1 dòng => trạng thái của dialog là "edit"
+      } else {
+        axios
+          .put(
+            `http://cukcuk.manhnv.net/v1/Employees/${this.employee.EmployeeId}`,
+            this.employee
+          )
+          .then((res) => {
+            console.log(res);
+            alert("Cap nhat thanh cong");
+          })
+          .catch((res) => {
+            console.log(res);
+            alert("Cap nhat that bai");
+          });
+      }
     },
   },
 };
