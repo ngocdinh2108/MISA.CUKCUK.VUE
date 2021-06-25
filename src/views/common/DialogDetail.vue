@@ -234,7 +234,7 @@ export default {
       dialogMode: "",
       colorToast: "#019160",
       contentToast: "Thêm mới thành công",
-      iconToast: "fas fa-check-circle"
+      iconToast: "fas fa-check-circle",
     };
   },
   // Ngay khi được khởi tạo, component DialogDetail sẽ thực hiện các nhiệm vụ bên trong hàm created()
@@ -244,8 +244,22 @@ export default {
      * DNDINH 21.06.2021
      */
     eventBus.$on("showDialog", (dialogModeEventBus) => {
+      // Nhận dialog mode
       this.dialogMode = dialogModeEventBus;
+      // Xóa hết dữ liệu trong dialog
       this.employee = {};
+      // Gọi API tự sinh mã mới
+      axios
+        .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
+        .then((res) => {
+          // Gán mã nhân viên mới vào ô input Mã nhân viên
+          this.employee.EmployeeCode = res.data;
+          alert(this.employee.EmployeeCode);
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+      // Hiển thị form
       this.isHide = false;
     });
 
@@ -288,16 +302,33 @@ export default {
           .then((res) => {
             console.log(res);
             // Nếu như thêm thành công, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
-            eventBus.$emit("showToastMessenger", this.iconToast, this.contentToast, this.colorToast);
-            // Load lại dữ liệu
-
+            eventBus.$emit(
+              "showToastMessenger",
+              this.iconToast,
+              this.contentToast,
+              this.colorToast
+            );
+            // Gửi sự kiện Load lại dữ liệu cho component Content Grid
+            eventBus.$emit("reloadData");
             // Đóng dialog-detail
             this.isHide = true;
-
           })
           .catch((res) => {
             console.log(res);
-            alert("Them that bai");
+            this.iconToast = "fas fa-exclamation-triangle";
+            this.contentToast = "Thêm dữ liệu thất bại";
+            this.colorToast = "#F65454";
+            // Nếu như thêm thất bại, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
+            eventBus.$emit(
+              "showToastMessenger",
+              this.iconToast,
+              this.contentToast,
+              this.colorToast
+            );
+            // Gửi sự kiện Load lại dữ liệu cho component Content Grid
+            eventBus.$emit("reloadData");
+            // Đóng dialog-detail
+            this.isHide = true;
           });
         // Khi ấn dblclick vào 1 dòng => trạng thái của dialog là "edit"
       } else {
@@ -308,11 +339,35 @@ export default {
           )
           .then((res) => {
             console.log(res);
-            alert("Cap nhat thanh cong");
+            // Nếu như thêm thành công, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
+            this.contentToast = "Cập nhật thành công";
+            eventBus.$emit(
+              "showToastMessenger",
+              this.iconToast,
+              this.contentToast,
+              this.colorToast
+            );
+            // Gửi sự kiện Load lại dữ liệu cho component Content Grid
+            eventBus.$emit("reloadData");
+            // Đóng dialog-detail
+            this.isHide = true;
           })
           .catch((res) => {
             console.log(res);
-            alert("Cap nhat that bai");
+            this.iconToast = "fas fa-exclamation-triangle";
+            this.contentToast = "Cập nhật thất bại";
+            this.colorToast = "#F65454";
+            // Nếu như thêm thất bại, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
+            eventBus.$emit(
+              "showToastMessenger",
+              this.iconToast,
+              this.contentToast,
+              this.colorToast
+            );
+            // Gửi sự kiện Load lại dữ liệu cho component Content Grid
+            eventBus.$emit("reloadData");
+            // Đóng dialog-detail
+            this.isHide = true;
           });
       }
     },

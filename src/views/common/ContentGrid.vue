@@ -58,25 +58,14 @@ export default {
      * Sử dụng axios để get dữ liệu từ API nếu thành công sẽ thực hiện các câu lệnh trong then, ngc lại nếu lỗi sẽ thực hiện các câu lệnh trong catch
      * DNDINH 21.06.2021
      */
-    axios
-      .get("http://cukcuk.manhnv.net/v1/Employees")
-      .then((res) => {
-        for (let index = 0; index < res.data.length; index++) {
-          // Format ngày sinh
-          res.data[index].DateOfBirth = commonJS.formatDate(
-            res.data[index].DateOfBirth
-          );
-          // Format tiền
-          res.data[index].Salary = commonJS.formatMoney(res.data[index].Salary);
-          // Chuyển đổi giới tính (kiểu số) và trạng thái công việc (kiểu số) về kiểu chuỗi hiển thị
-        }
-        // Đổ dữ liệu lấy được vào mảng this.employees đc khai báo trong data
-        this.employees = res.data;
-      })
-      .catch((res) => {
-        console.log(res);
-        console.log("error");
-      });
+    this.getDataTable();
+
+    /**
+     * Lắng nghe sự kiện reload lại trang được gửi từ component DialogDetail khi thêm mới dữ liệu hoặc cập nhật dữ liệu thành công
+     */
+    eventBus.$on("reloadData", () => {
+      this.getDataTable();
+    });
   },
   data() {
     return {
@@ -88,6 +77,33 @@ export default {
     };
   },
   methods: {
+    /**
+     * Sự kiện binding dữ liệu vào trong content grid
+     * DNDINH 23.06.2021
+     */
+    getDataTable() {
+      axios
+        .get("http://cukcuk.manhnv.net/v1/Employees")
+        .then((res) => {
+          for (let index = 0; index < res.data.length; index++) {
+            // Format ngày sinh
+            res.data[index].DateOfBirth = commonJS.formatDate(
+              res.data[index].DateOfBirth
+            );
+            // Format tiền
+            res.data[index].Salary = commonJS.formatMoney(
+              res.data[index].Salary
+            );
+            // Chuyển đổi giới tính (kiểu số) và trạng thái công việc (kiểu số) về kiểu chuỗi hiển thị
+          }
+          // Đổ dữ liệu lấy được vào mảng this.employees đc khai báo trong data
+          this.employees = res.data;
+        })
+        .catch((res) => {
+          console.log(res);
+          console.log("error");
+        });
+    },
     /**
      * Sự kiện double click 1 dòng
      * DNDINH 23.06.2021
