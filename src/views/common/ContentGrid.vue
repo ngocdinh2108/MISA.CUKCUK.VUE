@@ -23,10 +23,11 @@
       <tbody>
         <!-- Sau khi đã get được dữ liệu từ API và đổ vào trong mảng employees => dùng v-for để lặp mảng và bind dữ liệu vào content grid -->
         <tr
-          v-for="employee in employees"
+          v-for="(employee, index) in employees"
           :key="employee.EmployeeId"
           @dblclick="trOnDblClick(employee.EmployeeId)"
-          :class="{ 'row-selected': isSelected }"
+          :class="{ 'row-selected': index == rowSelected}"
+          @click="(rowSelected = index)"
         >
           <td>{{ employee.EmployeeCode }}</td>
           <td>{{ employee.FullName }}</td>
@@ -73,7 +74,7 @@ export default {
       employees: [],
       // Biến để lưu trạng thái của dialog-detail
       dialogMode: "",
-      isSelected: false,
+      rowSelected: null,
     };
   },
   methods: {

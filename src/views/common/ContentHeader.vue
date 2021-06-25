@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from "axios";
 // Import eventBus để sử dụng
 import { eventBus } from "../../main.js";
 export default {
@@ -24,13 +25,26 @@ export default {
      * Sự kiện "showDialogDetail" sẽ gửi sự kiện "showDialog" đến component khác khi click vào nút "Thêm nhân viên"
      * DNDINH 21.06.2021
      */
-    showDialogDetail() {
-      eventBus.$emit("showDialog", this.dialogMode);
+    async showDialogDetail() {
+      await axios
+        .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
+        .then((res) => {
+          // Gán mã nhân viên mới vào ô input Mã nhân viên
+          this.newEmployeeCode = res.data;
+        })
+        .catch((res) => {
+          
+        });
+      eventBus.$emit("showDialog", this.dialogMode, this.newEmployeeCode);
     },
   },
   data() {
     return {
-      dialogMode: "add"
+      newEmployeeCode: "",
+      dialogMode: "add",
+      iconToast: "",
+      contentToast: "",
+      colorToast: "",
     };
   },
 };

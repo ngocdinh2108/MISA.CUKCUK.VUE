@@ -243,22 +243,12 @@ export default {
      * Lắng nghe sự kiện được gửi sang từ component ContentHeader khi click nút thêm mới
      * DNDINH 21.06.2021
      */
-    eventBus.$on("showDialog", (dialogModeEventBus) => {
+    eventBus.$on("showDialog", (dialogModeEventBus, newEmployeeCodeEventBus) => {
       // Nhận dialog mode
       this.dialogMode = dialogModeEventBus;
       // Xóa hết dữ liệu trong dialog
       this.employee = {};
-      // Gọi API tự sinh mã mới
-      axios
-        .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
-        .then((res) => {
-          // Gán mã nhân viên mới vào ô input Mã nhân viên
-          this.employee.EmployeeCode = res.data;
-          alert(this.employee.EmployeeCode);
-        })
-        .catch((res) => {
-          console.log(res);
-        });
+      this.employee.EmployeeCode = newEmployeeCodeEventBus;
       // Hiển thị form
       this.isHide = false;
     });

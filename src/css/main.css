@@ -1,3 +1,8 @@
+.router-link-exact-active .sidebar-content-item {
+    background: #2FBE8E;
+    color: white;
+}
+
 body {
     height: 100vh;
     font-family: GoogleSans-Regular;

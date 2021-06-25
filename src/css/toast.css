@@ -11,6 +11,7 @@
     align-items: center;
     box-shadow: 0 3px 6px #000000;
     justify-content: space-between;
+    z-index: 20;
 }
 
 .toast-detail-left {
