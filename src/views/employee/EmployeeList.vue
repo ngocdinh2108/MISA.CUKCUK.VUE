@@ -7,6 +7,7 @@
     <dialog-detail></dialog-detail>
     <popup></popup>
     <toast-messenger></toast-messenger>
+    <loading></loading>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import ContentPaging from "../common/ContentPaging.vue";
 import DialogDetail from '../common/DialogDetail.vue';
 import Popup from '../common/Popup.vue';
 import ToastMessenger from '../common/ToastMessenger.vue';
+import Loading from '../common/Loading.vue';
 
 export default {
   components: {
@@ -28,6 +30,7 @@ export default {
     DialogDetail,
     Popup,
     ToastMessenger,
+    Loading,
   },
   data() {
     return {

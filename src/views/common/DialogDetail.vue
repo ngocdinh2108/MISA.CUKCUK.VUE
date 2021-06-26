@@ -263,9 +263,9 @@ export default {
       isHide: true,
       employee: {},
       dialogMode: "",
-      colorToast: "#019160",
-      contentToast: "Thêm mới thành công",
-      iconToast: "fas fa-check-circle",
+      colorToast: "",
+      contentToast: "",
+      iconToast: "",
     };
   },
   // Ngay khi được khởi tạo, component DialogDetail sẽ thực hiện các nhiệm vụ bên trong hàm created()
@@ -277,10 +277,11 @@ export default {
     eventBus.$on(
       "showDialog",
       (dialogModeEventBus, newEmployeeCodeEventBus) => {
-        // Nhận dialog mode
+        // Nhận dialog mode từ component ContentHeader
         this.dialogMode = dialogModeEventBus;
         // Xóa hết dữ liệu trong dialog
         this.employee = {};
+        // Gán mã tự sinh cho mã nhân viên
         this.employee.EmployeeCode = newEmployeeCodeEventBus;
         // Hiển thị form
         this.isHide = false;
@@ -325,6 +326,11 @@ export default {
           .post("http://cukcuk.manhnv.net/v1/Employees", this.employee)
           .then((res) => {
             console.log(res);
+            this.colorToast = "#019160";
+            this.contentToast = "Thêm mới thành công";
+            this.iconToast = "fas fa-check-circle";
+            // Gửi sự kiện Load lại dữ liệu cho component Content Grid
+            eventBus.$emit("reloadData");
             // Nếu như thêm thành công, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
             eventBus.$emit(
               "showToastMessenger",
@@ -332,8 +338,6 @@ export default {
               this.contentToast,
               this.colorToast
             );
-            // Gửi sự kiện Load lại dữ liệu cho component Content Grid
-            eventBus.$emit("reloadData");
             // Đóng dialog-detail
             this.isHide = true;
           })
@@ -365,6 +369,8 @@ export default {
             console.log(res);
             // Nếu như thêm thành công, gửi sự kiện cho component ToastMessenger để hiển thị thông báo
             this.contentToast = "Cập nhật thành công";
+            this.colorToast = "#019160";
+            this.iconToast = "fas fa-check-circle";
             eventBus.$emit(
               "showToastMessenger",
               this.iconToast,

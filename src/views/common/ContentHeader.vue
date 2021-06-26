@@ -20,6 +20,12 @@ import axios from "axios";
 // Import eventBus để sử dụng
 import { eventBus } from "../../main.js";
 export default {
+  created() {
+    eventBus.$on("getRowIsSelected", (employeeIdEventBus) => {
+      this.employeeId = employeeIdEventBus;
+      console.log(this.employeeId); 
+    });
+  },
   methods: {
     /**
      * Sự kiện "showDialogDetail" sẽ gửi sự kiện "showDialog" đến component khác khi click vào nút "Thêm nhân viên"
@@ -33,10 +39,18 @@ export default {
           this.newEmployeeCode = res.data;
         })
         .catch((res) => {});
+
+      // Gửi sự kiện showDialog cho component dialog detail
       eventBus.$emit("showDialog", this.dialogMode, this.newEmployeeCode);
     },
+
+    /**
+     * Sự kiện khi ấn nút xóa nhân viên
+     * DNDINH 21.06.2021
+     */
     btnRemove() {
-      eventBus.$emit("showPopup");
+      // Gửi sự kiện hiển thị popup cho component popup
+      eventBus.$emit("showPopup", this.employeeId);
     },
   },
   data() {
@@ -47,7 +61,8 @@ export default {
       contentToast: "",
       colorToast: "",
       selected: "",
-      element: ""
+      element: "",
+      employeeId: null,
     };
   },
 };

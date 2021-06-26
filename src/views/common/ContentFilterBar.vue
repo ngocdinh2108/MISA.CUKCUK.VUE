@@ -46,13 +46,30 @@
     </div>
 
     <div class="content-filter-right">
-      <div title="Nạp lại" id="btn-reload" class="icon-refresh"></div>
+      <div
+        @click="btnReload()"
+        title="Nạp lại"
+        id="btn-reload"
+        class="icon-refresh"
+      ></div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+// Import eventBus để sử dụng
+import { eventBus } from "../../main.js";
+export default {
+  methods: {
+    /**
+     * Hàm load lại dữ liệu của grid
+     * DNDINH 26.06.2021
+     */
+    btnReload() {
+      eventBus.$emit("reloadData");
+    },
+  },
+};
 </script>
 
 <style scoped>

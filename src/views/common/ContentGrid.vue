@@ -26,8 +26,8 @@
           v-for="(employee, index) in employees"
           :key="employee.EmployeeId"
           @dblclick="trOnDblClick(employee.EmployeeId)"
-          :class="{ 'row-selected': index == rowSelected}"
-          @click="[(rowSelected = index), selectRow()]"
+          :class="{ 'row-selected': index == rowSelected }"
+          @click="[(rowSelected = index), selectRow(employee.EmployeeId)]"
         >
           <td>{{ employee.EmployeeCode }}</td>
           <td>{{ employee.FullName }}</td>
@@ -65,6 +65,7 @@ export default {
      * Lắng nghe sự kiện reload lại trang được gửi từ component DialogDetail khi thêm mới dữ liệu hoặc cập nhật dữ liệu thành công
      */
     eventBus.$on("reloadData", () => {
+      eventBus.$emit("showLoader");
       this.getDataTable();
     });
   },
@@ -78,10 +79,14 @@ export default {
     };
   },
   methods: {
-    selectRow(){
-      eventBus.$emit("getRowIsSelected", this.employee.EmployeeId);
-      console.log(this.employee.EmployeeId);
+    /**
+     * Sự kiện khi click chọn 1 bản ghi
+     * DNDINH 26.06.2021
+     */
+    selectRow(employeeId) {
+      eventBus.$emit("getRowIsSelected", employeeId);
     },
+
     /**
      * Sự kiện binding dữ liệu vào trong content grid
      * DNDINH 23.06.2021
@@ -131,9 +136,6 @@ export default {
         .catch((res) => {
           console.log(res);
         });
-      // Binding dữ liệu vào dialog-detail
-
-      // Hiển thị dialog-detail
     },
   },
 };

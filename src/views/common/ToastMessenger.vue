@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { eventBus } from '../../main';
+import { eventBus } from "../../main";
 export default {
   data() {
     return {
@@ -28,18 +28,29 @@ export default {
       color: "#0075FF",
     };
   },
-  created(){
+  created() {
     /**
-     * Lắng nghe sự kiện hiển thị ToastMessenger được gửi từ component DialogDetail
+     * Lắng nghe sự kiện hiển thị ToastMessenger được gửi từ component khác
      * DNDINH 25.06.2021
      */
-    eventBus.$on("showToastMessenger", (iconToast, contentToast, colorToast) => {
-      this.icon = iconToast,
-      this.content = contentToast,
-      this.color = colorToast,
-      this.isHide = false
-    })
-  }
+    eventBus.$on(
+      "showToastMessenger",
+      (iconToast, contentToast, colorToast) => {
+        this.icon = iconToast;
+        this.content = contentToast;
+        this.color = colorToast;
+        this.isHide = false; // Hiển thị toast messenge
+
+        // Sau 2s sẽ đóng toast messenge đồng thời trả dữ liệu về ban đầu
+        setTimeout(() => {
+          this.isHide = true;
+          this.content = "";
+          this.color = "";
+          this.icon = "";
+        }, 2000);
+      }
+    );
+  },
 };
 </script>
 
