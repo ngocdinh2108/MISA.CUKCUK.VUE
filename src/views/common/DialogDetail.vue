@@ -88,14 +88,19 @@
             <div class="dialog-body-row-left">
               <div class="dialog-label">Số CMTND/ Căn cước</div>
               <div class="wrap-input-dialog">
-                <input class="input-dialog" type="text" disabled />
+                <input class="input-dialog" type="text" />
               </div>
             </div>
 
             <div class="dialog-body-row-right">
               <div class="dialog-label">Ngày cấp</div>
               <div class="wrap-input-dialog">
-                <input class="input-dialog" type="date" disabled />
+                <input
+                  fieldName="DateOfBirth"
+                  id="dtDateOfBirth"
+                  class="input-dialog"
+                  type="date"
+                />
               </div>
             </div>
           </div>
@@ -104,7 +109,7 @@
             <div class="dialog-body-row-left">
               <div class="dialog-label">Nơi cấp</div>
               <div class="wrap-input-dialog">
-                <input class="input-dialog" type="text" disabled />
+                <input class="input-dialog" type="text" />
               </div>
             </div>
           </div>
@@ -174,14 +179,40 @@
 
           <div class="dialog-body-row">
             <div class="dialog-body-row-left">
-              <div class="dialog-label">Mức lương cơ bản</div>
+              <div class="dialog-label">Mã số thuế cá nhân</div>
               <div class="wrap-input-dialog">
                 <input
                   fieldName="Salary"
                   id="txtSalary"
                   class="input-dialog"
                   type="text"
+                />
+              </div>
+            </div>
+
+            <div class="dialog-body-row-right">
+              <div class="dialog-label">Mức lương cơ bản</div>
+              <div class="wrap-input-dialog">
+                <input
+                  fieldName="WorkStatus"
+                  id="txtStatus"
+                  class="input-dialog"
+                  type="text"
                   v-model="employee.Salary"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="dialog-body-row">
+            <div class="dialog-body-row-left">
+              <div class="dialog-label">Ngày gia nhập công ty</div>
+              <div class="wrap-input-dialog">
+                <input
+                  fieldName="Salary"
+                  id="txtSalary"
+                  class="input-dialog"
+                  type="text"
                 />
               </div>
             </div>
@@ -243,15 +274,18 @@ export default {
      * Lắng nghe sự kiện được gửi sang từ component ContentHeader khi click nút thêm mới
      * DNDINH 21.06.2021
      */
-    eventBus.$on("showDialog", (dialogModeEventBus, newEmployeeCodeEventBus) => {
-      // Nhận dialog mode
-      this.dialogMode = dialogModeEventBus;
-      // Xóa hết dữ liệu trong dialog
-      this.employee = {};
-      this.employee.EmployeeCode = newEmployeeCodeEventBus;
-      // Hiển thị form
-      this.isHide = false;
-    });
+    eventBus.$on(
+      "showDialog",
+      (dialogModeEventBus, newEmployeeCodeEventBus) => {
+        // Nhận dialog mode
+        this.dialogMode = dialogModeEventBus;
+        // Xóa hết dữ liệu trong dialog
+        this.employee = {};
+        this.employee.EmployeeCode = newEmployeeCodeEventBus;
+        // Hiển thị form
+        this.isHide = false;
+      }
+    );
 
     /**
      * Lắng nghe sự kiện được gửi sang từ component ContentGrid khi double click 1 dòng

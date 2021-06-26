@@ -27,7 +27,7 @@
           :key="employee.EmployeeId"
           @dblclick="trOnDblClick(employee.EmployeeId)"
           :class="{ 'row-selected': index == rowSelected}"
-          @click="(rowSelected = index)"
+          @click="[(rowSelected = index), selectRow()]"
         >
           <td>{{ employee.EmployeeCode }}</td>
           <td>{{ employee.FullName }}</td>
@@ -78,6 +78,10 @@ export default {
     };
   },
   methods: {
+    selectRow(){
+      eventBus.$emit("getRowIsSelected", this.employee.EmployeeId);
+      console.log(this.employee.EmployeeId);
+    },
     /**
      * Sự kiện binding dữ liệu vào trong content grid
      * DNDINH 23.06.2021

@@ -14,3 +14,7 @@ th {
     top: 0;
     background: rgb(255, 255, 255);
 }
+
+tbody tr:hover {
+    background-color: #e5e5e5;
+}

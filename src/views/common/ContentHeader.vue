@@ -2,7 +2,7 @@
   <div class="content-header">
     <div class="content-header-text">Danh sách nhân viên</div>
     <div class="content-header-feature">
-      <button class="m-btn-icon" id="m-btn-remove">
+      <button @click="btnRemove()" class="m-btn-icon" id="m-btn-remove">
         <i class="far fa-trash-alt"></i>
         <div class="btn-text">Xóa nhân viên</div>
       </button>
@@ -32,10 +32,11 @@ export default {
           // Gán mã nhân viên mới vào ô input Mã nhân viên
           this.newEmployeeCode = res.data;
         })
-        .catch((res) => {
-          
-        });
+        .catch((res) => {});
       eventBus.$emit("showDialog", this.dialogMode, this.newEmployeeCode);
+    },
+    btnRemove() {
+      eventBus.$emit("showPopup");
     },
   },
   data() {
@@ -45,6 +46,8 @@ export default {
       iconToast: "",
       contentToast: "",
       colorToast: "",
+      selected: "",
+      element: ""
     };
   },
 };
