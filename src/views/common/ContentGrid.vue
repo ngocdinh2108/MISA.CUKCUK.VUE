@@ -31,7 +31,7 @@
         >
           <td>{{ employee.EmployeeCode }}</td>
           <td>{{ employee.FullName }}</td>
-          <td>{{ employee.GenderName }}</td>
+          <td>{{ employee.Gender }}</td>
           <td class="m-align-center">{{ employee.DateOfBirth }}</td>
           <td>{{ employee.PhoneNumber }}</td>
           <td>{{ employee.Email }}</td>
@@ -104,10 +104,38 @@ export default {
             res.data[index].Salary = commonJS.formatMoney(
               res.data[index].Salary
             );
-            // Chuyển đổi giới tính (kiểu số) và trạng thái công việc (kiểu số) về kiểu chuỗi hiển thị
+            // Chuyển đổi trạng thái công việc (kiểu số) về kiểu chuỗi hiển thị
+            switch (res.data[index].WorkStatus) {
+              case 1:
+                res.data[index].WorkStatus = "Đang làm việc";
+                break;
+              case 2:
+                res.data[index].WorkStatus = "Chính thức";
+                break;
+              case 3:
+                res.data[index].WorkStatus = "Thử việc";
+                break;
+              default:
+                res.data[index].WorkStatus = "Không xác định";
+                break;
+            }
+
+            // Chuyển đổi giới tính (kiểu số) về kiểu chuỗi hiển thị
+            switch (res.data[index].Gender) {
+              case 0:
+                res.data[index].Gender = "Nữ";
+                break;
+              case 1:
+                res.data[index].Gender = "Nam";
+                break;
+              default:
+                res.data[index].Gender = "Không xác định";
+                break;
+            }
           }
           // Đổ dữ liệu lấy được vào mảng this.employees đc khai báo trong data
           this.employees = res.data;
+          console.log("ok");
         })
         .catch((res) => {
           console.log(res);
