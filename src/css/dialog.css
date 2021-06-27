@@ -13,7 +13,7 @@
 
 .dialog-content {
     width: 800px;
-    height: 680px;
+    height: 660px;
     position: absolute;
     background-color: #ffffff;
     z-index: 3;
@@ -36,12 +36,12 @@
 .dialog-content-header-icon {
     width: 40px;
     height: 40px;
-    border-radius: 0 5px 0 0;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0px;
+    right: 0px;
     background-color: #ffffff;
     opacity: 0.7;
+    border-radius: 0 5px 0 0;
 }
 
 .dialog-content-header-icon:hover {
@@ -49,9 +49,10 @@
 }
 
 .dialog-content-body {
-    height: calc(100% - 81px);
-    margin: 0 24px;
+    height: calc(100% - 120px);
+    padding: 0 24px;
     display: flex;
+    overflow-y: scroll;
 }
 
 .dialog-body-left {
@@ -117,7 +118,7 @@
 }
 
 .input-dialog {
-    height: 30px;
+    height: 40px;
     border-radius: 4px;
     outline: none;
     width: 244px;
@@ -138,5 +139,6 @@ input[fieldName] {
 select[fieldName] {
     font-family: GoogleSans-Regular;
     font-size: 13px;
+    height: 40px;
     color: #000000;
 }

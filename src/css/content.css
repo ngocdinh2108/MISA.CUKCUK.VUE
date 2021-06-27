@@ -62,11 +62,12 @@
     width: 5px;
     height: 5px;
     background: #bbbbbb;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: grey;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .content-paging-bar {
